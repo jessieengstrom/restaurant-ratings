@@ -9,10 +9,8 @@ def create_restaurant_ratings(file_name):
     with open(file_name) as my_file:
         for line in my_file:
             line = line.rstrip()
-            rating = line.split(":")
-            restaurant_ratings[rating[0]] = rating[1]
-
-        
+            rest, rating = line.split(":")
+            restaurant_ratings[rest] = rating
 
     while True:
         print """
@@ -23,10 +21,10 @@ def create_restaurant_ratings(file_name):
 
         user_choice = raw_input("What is your choice? > ")
 
-        if user_choice == "1": 
-            new_list = sorted(restaurant_ratings.items())  
-            for rest, rat in new_list:
-                print rest + " is rated at " + str(rat) + "."
+        if user_choice == "1":   
+            for rest, rat in sorted(restaurant_ratings.items()):
+                print "{name} is rated at {score}.".format(name=rest, score=rat)
+                # print "{} is rated at {}.".format(rest, rat)
 
         elif user_choice == "2":
             restaurant = raw_input("What restaurant are you rating? > ")
